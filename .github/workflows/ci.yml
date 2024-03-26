@@ -11,9 +11,9 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with: 
-          php-version: '7.4'
+          php-version: '8.0'
       - name: Install dependencies
-        run: composer install --no-dev --optimize-autoloader
+        run: composer install --prefer-dist --no-progress --no-suggest
       - name: Run PHPMD
         run: vendor/bin/phpmd src text cleancode,codesize
       - name: Run PHPCS
