@@ -9,6 +9,28 @@ Ce projet est un blog simple sur le basketball, construit avec PHP et JSON comme
 - Édition d'articles existants
 - Suppression d'articles
 
+## Workflow GitHub Actions
+
+```yml
+name: CI
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+      - name: Install dependencies
+        run: composer install --no-dev --optimize-autoloader
+      - name: Run PHPMD
+        run: vendor/bin/phpmd src text cleancode,codesize
+      - name: Run PHPCS
+        run: vendor/bin/phpcs --standard=PSR12 src
+```
+
 ## Structure du Projet
 
 Le projet est structuré comme suit :
@@ -23,6 +45,11 @@ Le projet est structuré comme suit :
 1. Clonez le dépôt sur votre serveur local ou de production.
 2. Assurez-vous que PHP est installé sur votre système.
 3. Donnez les permissions nécessaires pour que le serveur Web puisse écrire dans le fichier `data/posts.json`.
+4. Assurez-vous de bien indenter le bloc de code YAML du workflow GitHub Actions pour une lisibilité optimale.
+
+5. Enregistrez les modifications apportées au fichier README.md.
+
+6. Faites un commit de vos modifications et poussez-les sur votre dépôt GitHub.
 
 ## Utilisation
 
