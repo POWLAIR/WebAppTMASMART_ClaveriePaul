@@ -13,10 +13,10 @@ jobs:
         with: 
           php-version: '8.3'
       - name: Install dependencies
-        run: |
-          composer install --prefer-dist --no-progress --no-suggest
-          php $GITHUB_WORKSPACE/vendor/bin/phpcs --config-set severity 8
+        run: composer install --prefer-dist --no-progress --no-suggest
       - name: Run PHPMD
         run: $GITHUB_WORKSPACE/vendor/bin/phpmd src text cleancode,codesize
       - name: Run PHPCS
-        run: $GITHUB_WORKSPACE/vendor/bin/phpcs --standard=PSR12 src
+        run: |
+          php $GITHUB_WORKSPACE/vendor/bin/phpcs --config-set severity 8
+          $GITHUB_WORKSPACE/vendor/bin/phpcs --standard=PSR12 src
